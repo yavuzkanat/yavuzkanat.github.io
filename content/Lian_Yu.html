@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CTFs & Articles — Terminal View</title>
+    <title>CTFs</title>
     <style>
       :root {
         --bg: #0b0f12;
@@ -101,7 +101,7 @@
         <img src="/imgs/lianyu/5.png" alt="" style="width: 100%;height: 80%;">
         <p>I am use wfuzz to find the ticket.</p>
         <p class="cmd" style="font-size:small; font-style: italic;">wfuzz -w /usr/share/wordlist/dirb/directory-list-1.0.txt http://machiceip/island/2100/FUZZ.ticket </p>
-        <p>And we are finding a hash in gr***_a****.ticket . The hash is "RTy8yhBQdscX". I think the hash is seem like a base. And I am understending it's base58 encoding.</p>
+        <p>And we are finding a hash in gr***_a****.ticket . The hash is "R********". I think the hash is seem like a base. And I am understending it's base58 encoding.</p>
         <p>it's time to use the code word with hash. And I am try to connect the ftp server.</p>
         <img src="/imgs/lianyu/6.png" alt="ftp" style="width: 100%;height:80% ;">
         <p>I am download to all file in ftp server. And one of theme seem like broken etc. And I want to check via hexeditor tool. That's what I thought! <i>58 45 6F AE 0A 0D 1A 0A</i> it's not correct hex code for a PNG file. It has to be <i>89 50 4e 47 0d 0a 1a 0a .</i> 
