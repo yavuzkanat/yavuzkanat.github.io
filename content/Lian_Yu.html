@@ -88,34 +88,39 @@
       <div class="term-body" contenteditable="false">
         $ <span class="cmd">cat Lian_Yu Write Up.txt</span>
         <h1> Lian Yu Write Up (THM) </h1>
-        <h3 class="cmd">Port Scan via Nmap</h3>
+        <h4 class="cmd">Port Scan via Nmap</h4>
         <p> Let's look up open ports on the machine.</p>
         <img src="/imgs/lianyu/1.png" alt="Nmap" style="width: 600px; height: 120px;">
-        <p>As we are see http run on the port 80. We should scan directories.</p>
+        <h4 class="cmd">Directory Enumeration</h4>
+        <p>As we are seeing HTTP run on port 80. We should scan directories.</p>
         <img src="/imgs/lianyu/2.png" alt="Wfuzz" style="width: 100%; height: 80%;">
         <p>We've found the <i>/island</i> directory.</p>
         <img src="/imgs/lianyu/3.png" alt="island" style="width: 100%; height: 80%;">
-        <p>It's say The Code Word is <b>vigilante</b>. I did take note that. Apparentaly we're gonna use it somewhere. And i am keep scaning but I've decided use gobuster insted of wfuzz. Finally I found the first question answer! 2*** </p>
+        <p>Page says The Code Word is <i>vigilante.</i> I did take note of that. Apparently, we're gonna use it somewhere. And I am keeping scanning, but I've decided to use <i class="cmd">Gobuster</i> instead of <i class="cmd">Wfuzz</i>. Finally, I found the first question! 2*** </p>
         <img src="/imgs/lianyu/4.png" alt="1" style="width: 80%;">
-        <p>When we're looking the page source. It's say there is a <b>"ticket"</b></p>
+        <p>When we're looking at the page source. It makes mention that there is a <b>"ticket"</b>.</p>
         <img src="/imgs/lianyu/5.png" alt="" style="width: 100%;height: 80%;">
-        <p>I am use wfuzz to find the ticket.</p>
+        <p>I am using wfuzz to find the ticket.</p>
         <p class="cmd" style="font-size:small; font-style: italic;">wfuzz -w /usr/share/wordlist/dirb/directory-list-1.0.txt http://machiceip/island/2100/FUZZ.ticket </p>
-        <p>And we are finding a hash in gr***_a****.ticket . The hash is "R********". I think the hash is seem like a base. And I am understending it's base58 encoding.</p>
-        <p>it's time to use the code word with hash. And I am try to connect the ftp server.</p>
+        <p>And we are finding a hash in gr***_a****.ticket. The hash is "R********". I think the hash seems like a Base. And I am understanding it's <i class="cmd">Base58</i> encoding.</p>
+        <h4 class="cmd">Cheking the <i class="cmd">FTP</i> Server</h4>
+        <p>Next Step! It's time to use the code "vigilante" word with the hash I decoded at the FTP Server. </p>
         <img src="/imgs/lianyu/6.png" alt="ftp" style="width: 100%;height:80% ;">
-        <p>I am download to all file in ftp server. And one of theme seem like broken etc. And I want to check via hexeditor tool. That's what I thought! <i>58 45 6F AE 0A 0D 1A 0A</i> it's not correct hex code for a PNG file. It has to be <i>89 50 4e 47 0d 0a 1a 0a .</i> 
+        <h4 class="cmd">JPG & Hexadecimal Signature</h4>
+        <p>I am downloading all files in FTP server. And one of them seems broken. And I want to check via hexeditor tool. It's happening as I thought! <i class="cmd">58 45 6F AE 0A 0D 1A 0A</i> it's not the correct Magic Number for a <a class="cmd" href="https://en.wikipedia.org/wiki/PNG">PNG</a> file. It has to be <i class="cmd">89 50 4e 47 0d 0a 1a 0a </i>.
         <img src="/imgs/lianyu/7.png" alt="hex" style="width: 100%;height: 80%;"></p>
-        <p>The picture says password is password . What should be for this password ? I am realizing that a steganography after think about a whil. 
-        <br><i style="font-size: small;" class="cmd">steghide extract -sf aa.jpg</i> </p><p>I am finding two txt files in this jpg file.</p>
+        <h4 class="cmd">Steganography</h4>
+        <p>The picture says the password is password. What should be for this password? I am realising that it must be <i class="cmd">steganography</i> after thinking for a while. 
+        <br><i style="font-size: small;" class="cmd">steghide extract -sf aa.jpg</i> </p><p>I am finding two TXT files inside this JPG file.</p>
         <ul>
-          <li>shado.txt -> ssh password ! </li>
+          <li>shado.txt -> SSH password ! </li>
           <li>passwd.txt -> hints for username ! </li>
         </ul>
         <img src="/imgs/lianyu/8.png" alt="credintials" style="width: 100%; height: 80%;">
-        <p>The character name which in the aa.jpg is <b>slade</b>. I think that's our ssh username! 
+        <p>The character name shown in the aa.jpg is <b>slade</b>. I think that's our <i class="cmd">SSH</i> username! 
         <br><i class="cmd">ssh slade@machineIP</i></p>
-        <p>After I get the user.txt.  I want to check sudo permissions. And I see <i>/bin/pkexec</i> can use by user slade ! We do privilage escalation use this sudo permission!</p>
+        <h4 class="cmd">Privilege Escalation</h4>
+        <p>After I get the <i class="cmd">"user.txt"</i>. I want to check <i class="cmd">sudo</i> permissions. And I see the command <i class="cmd">/bin/pkexec</i> can be used by user <i class="cmd">Slade</i> as sudo! We do privilege escalation using this <i class="cmd">sudo</i> permission!</p>
         <img src="/imgs/lianyu/9.png" alt="credintials" style="width: 100%; height: 80%;">
         <h4 class="cmd" style="text-align: center;">4nd I C4ptur3 Th3 R00t Fl4g !!!</h4>
 
