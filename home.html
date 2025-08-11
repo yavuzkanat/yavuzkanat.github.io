@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CTFs & Articles — Terminal View</title>
+    <style>
+      :root {
+        --bg: #0b0f12;
+        --accent: #76e6a8;
+        --muted: #9aa7b2;
+        --mono: "SFMono-Regular", ui-monospace, Menlo, Monaco, "Roboto Mono",
+          "Courier New", monospace;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+      .terminal {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        max-width: 900px;
+        margin: auto;
+        background: #05080b;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      }
+      .term-head {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        background: #0f1418;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+      .red {
+        background: #ff5f56;
+      }
+      .yellow {
+        background: #ffbd2e;
+      }
+      .green {
+        background: #27c93f;
+      }
+      .title {
+        margin-left: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .term-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        white-space: pre-wrap;
+        line-height: 1.5;
+      }
+      .term-body::-webkit-scrollbar {
+        width: 6px;
+      }
+      .term-body::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 3px;
+      }
+      .cmd {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="terminal">
+      <div class="term-head">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <div class="title">yavuzkanat@terminal:~$</div>
+      </div>
+      <div class="term-body" contenteditable="false">
+        $ <span class="cmd">ls -la home/</span>
+        <span class="cmd">-r--r--r--@ 1 yavuzkanat staff 1 Aug 30 22:56 </span><a class="cmd" href="/CTFs.html">CTFs/</a>
+        <span class="cmd">-r--r--r--@ 1 yavuzkanat staff 1 Aug 30 22:56 </span><a class="cmd" href="/articles.html">articles/</a>
+      </div>
+    </div>
+  </body>
+</html>
