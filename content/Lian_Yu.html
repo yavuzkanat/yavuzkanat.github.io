@@ -23,10 +23,10 @@
       .terminal {
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: 70%;
         border-radius: 8px;
         overflow: hidden;
-        max-width: 900px;
+        max-width: 1000px;
         margin: auto;
         background: #05080b;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
@@ -34,7 +34,7 @@
       .term-head {
         display: flex;
         align-items: center;
-        padding: 8px;
+        padding: 5px;
         background: #0f1418;
       }
       .dot {
@@ -60,12 +60,12 @@
       .term-body {
         flex: 1;
         overflow-y: auto;
-        padding: 16px;
+        padding: 10px;
         white-space: pre-wrap;
         line-height: 1.5;
       }
       .term-body::-webkit-scrollbar {
-        width: 6px;
+        width: 10px;
       }
       .term-body::-webkit-scrollbar-thumb {
         background: var(--accent);
@@ -77,6 +77,7 @@
     </style>
   </head>
   <body>
+    <br><br><br>
     <div class="terminal">
       <div class="term-head">
         <div class="dot red"></div>
@@ -86,9 +87,40 @@
       </div>
       <div class="term-body" contenteditable="false">
         $ <span class="cmd">cat Lian_Yu Write Up.txt</span>
-        <h1 class="header-1"> Lian Yu Write Up </h1>
-       
+        <h1> Lian Yu Write Up </h1>
+        <h3 class="cmd">Port Scan via Nmap</h3>
+        <p> Let's look up open ports on the machine.</p>
+        <img src="/imgs/lianyu/1.png" alt="Nmap" style="width: 600px; height: 120px;">
+        <p>As we are see http run on the port 80. We should scan directories.</p>
+        <img src="/imgs/lianyu/2.png" alt="Wfuzz" style="width: 100%; height: 80%;">
+        <p>We've found the /island directory.</p>
+        <img src="/imgs/lianyu/3.png" alt="island" style="width: 100%; height: 80%;">
+        <p>It's say The Code Word is <b>vigilante</b>. I did take note that. Apparentaly we're gonna use it somewhere. And i am keep scaning but I've decided use gobuster insted of wfuzz. Finally I found the first question answer! 2*** </p>
+        <img src="/imgs/lianyu/4.png" alt="1" style="width: 80%;">
+        <p>When we're looking the page source. It's say there is a <b>"ticket"</b></p>
+        <img src="/imgs/lianyu/5.png" alt="" style="width: 100%;height: 80%;">
+        <p>I am use wfuzz to find the ticket.</p>
+        <p class="cmd" style="font-size:small; font-style: italic;">wfuzz -w /usr/share/wordlist/dirb/directory-list-1.0.txt http://machiceip/island/2100/FUZZ.ticket </p>
+        <p>And we are finding a hash in gr***_a****.ticket . The hash is "RTy8yhBQdscX". I think the hash is seem like a base. And I am understending it's base58 encoding.</p>
+        <p>it's time to use the code word with hash. And I am try to connect the ftp server.</p>
+        <img src="/imgs/lianyu/6.png" alt="ftp" style="width: 100%;height:80% ;">
+        <p>I am download to all file in ftp server. And one of theme seem like broken etc. And I want to check via hexeditor tool. That's what I thought! <i>58 45 6F AE 0A 0D 1A 0A</i> it's not correct hex code for a PNG file. It has to be <i>89 50 4e 47 0d 0a 1a 0a .</i> 
+        <img src="/imgs/lianyu/7.png" alt="hex" style="width: 100%;height: 80%;"></p>
+        <p>The picture says password is password . What should be for this password ? I am realizing that a steganography after think about a whil. 
+        <br><i style="font-size: small;" class="cmd">steghide extract -sf aa.jpg</i> </p><p>I am finding two txt files in this jpg file.</p>
+        <ul>
+          <li>shado.txt -> ssh password ! </li>
+          <li>passwd.txt -> hints for username ! </li>
+        </ul>
+        <img src="/imgs/lianyu/8.png" alt="credintials" style="width: 100%; height: 80%;">
+        <p>The character name which in the aa.jpg is <b>slade</b>. I think that's our ssh username! 
+        <br><i class="cmd">ssh slade@machineIP</i></p>
+        <p>After I get the user.txt.  I want to check sudo permissions. And I see <i>/bin/pkexec</i> can use by user slade ! We do privilage escalation use this sudo permission!</p>
+        <img src="/imgs/lianyu/9.png" alt="credintials" style="width: 100%; height: 80%;">
+        <h4 class="cmd" style="text-align: center;">4nd I C4ptur3 Th3 R00t Fl4g !!!</h4>
+
       </div>
+     
     </div>
   </body>
 </html>
