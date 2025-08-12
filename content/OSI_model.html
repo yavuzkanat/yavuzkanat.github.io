@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CTFs</title>
+    <style>
+      :root {
+        --bg: #0b0f12;
+        --accent: #76e6a8;
+        --muted: #9aa7b2;
+        --mono: "SFMono-Regular", ui-monospace, Menlo, Monaco, "Roboto Mono",
+          "Courier New", monospace;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+      .terminal {
+        display: flex;
+        flex-direction: column;
+        height: 70%;
+        border-radius: 8px;
+        overflow: hidden;
+        max-width: 1000px;
+        margin: auto;
+        background: #05080b;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      }
+      .term-head {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        background: #0f1418;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+      .red {
+        background: #ff5f56;
+      }
+      .yellow {
+        background: #ffbd2e;
+      }
+      .green {
+        background: #27c93f;
+      }
+      .title {
+        margin-left: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .term-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 10px;
+        white-space: pre-wrap;
+        line-height: 1.5;
+      }
+      .term-body::-webkit-scrollbar {
+        width: 10px;
+      }
+      .term-body::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 3px;
+      }
+      .cmd {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <br /><br /><br />
+    <div class="terminal">
+      <div class="term-head">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <div class="title">yavuzkanat@terminal:~$</div>
+      </div>
+      <div class="term-body" contenteditable="false">
+        $ <span class="cmd">cat OSI_Model.txt</span>
+        <h1>The Basic of Network</h1>
+        <h1 class="cmd">OSI Model</h1>
+        <p>
+          The OSI model divides the network communications process into seven
+          distinct layers.
+        </p>
+        <h5 class="cmd">Application (Layer 7)</h5>
+        <p>
+          The application layer, the topmost layer on the OSI model, provides a
+          means for users to actually access network resources. This is the only
+          layer typically seen by end users, as it provides the interface that
+          is the base for all of their network activities.
+        </p>
+        <h5 class="cmd">Presentation (Layer 6)</h5>
+        <p>
+          The presentation layer transforms the data it receives into a format
+          that can be read by the application layer. The data encoding and
+          decoding done here depends on the application layer protocol that is
+          sending or receiving the data. This layer also handles several forms
+          of encryption and decryption used for securing data.
+        </p>
+        <h5 class="cmd">Session (Layer 5)</h5>
+        <p>
+          The session layer manages the dialog, or session between two
+          computers; it establishes, manages, and terminates this connection
+          among all communi- cating devices.
+        </p>
+        <h5 class="cmd">Transport (Layer 4)</h5>
+        <p>
+          The transport layer is a very interesting layer that serves numerous
+          important functions. Its first purpose is to choose the protocol over
+          which the data is to be transmitted. The two most common protocols in
+          the transport layer are TCP (Transmission Control Protocol) and UDP
+          (User Datagram Protocol); with TCP the transmission is
+          connection-based which means that a connection between the computers
+          is established and maintained for the duration of the request. This
+          allows for a reliable transmission, as the connection can be used to
+          ensure that the packets all get to the right place. A TCP connection
+          allows the two computers to remain in constant communication to ensure
+          that the data is sent at an acceptable speed, and that any lost data
+          is re-sent. With UDP, the opposite is true; packets of data are
+          essentially thrown at the receiving computer -- if it can't keep up
+          then that's its problem (this is why a video transmission over
+          something like Skype can be pixelated if the connection is bad). What
+          this means is that TCP would usually be chosen for situations where
+          accuracy is favoured over speed (e.g. file transfer, or loading a
+          webpage), and UDP would be used in situations where speed is more
+          important (e.g. video streaming). With a protocol selected, the
+          transport layer then divides the transmission up into bite-sized
+          pieces (over TCP these are called segments, over UDP they're called
+          datagrams), which makes it easier to transmit the message
+          successfully.
+        </p>
+        <h5 class="cmd">Network (Layer 3)</h5>
+        <p>
+          The network layer is responsible for routing data between physical
+          networks, and it is one of the most complex OSI layers. It is
+          responsible for the logical addressing of network hosts (for example,
+          through an IP address), and it also handles packet segmentation,
+          protocol identification, and in some cases, error detection. Routers
+          operate at this layer.
+        </p>
+        <h5 class="cmd">Data Link (Layer 2)</h5>
+        <p>
+          The data link layer provides a means of transporting data across a
+          physical network. Its primary purpose is to provide an addressing
+          scheme that can be used to identify physical devices and provide
+          error-checking features to ensure data integrity. Bridges and switches
+          are physical devices that operate at this layer.
+        </p>
+        <h5 class="cmd">Physical (Layer 1)</h5>
+        <p>
+          The physical layer establishes and terminates connections, provides a
+          means of sharing communication resources, and converts signals from
+          digital to analog and vice versa.
+        </p>
+        <img src="/imgs/OSI.jpg" alt="OSI" style="height: 100%; width: 80%;">
+      </div>
+    </div>
+  </body>
+</html>
