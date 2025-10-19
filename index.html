@@ -1,10 +1,191 @@
-<html lang="en">
+<!doctype html>
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yavuzkanat • Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0d1117;
+      --surface:#0f1720;
+      --muted:#8b949e;
+      --accent:#58a6ff;
+      --accent-2:#7ee787;
+      --card:#0b1220;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --max-w:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:linear-gradient(180deg,var(--bg),#071019 140%);
+      color:#c9d1d9;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px 16px;
+      display:flex;justify-content:center;
+    }
+
+    .container{width:100%;max-width:var(--max-w)}
+
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;
+      background:var(--glass);padding:10px 14px;border-radius:14px;backdrop-filter:blur(6px);
+      box-shadow:0 1px 0 rgba(255,255,255,0.02) inset;
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#2bd4ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021;box-shadow:0 6px 18px rgba(5,8,12,0.6);}
+    .brand h1{font-size:16px;margin:0}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
+
+    .nav-links{display:flex;gap:10px;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+    .nav-links a:hover{background:#071826;color:var(--accent)}
+    .lang-btn{background:#071826;color:var(--accent);border:none;padding:8px 10px;border-radius:8px;font-weight:600;cursor:pointer}
+    .lang-btn:hover{background:#0a1e2f;}
+
+    .hero{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:center;margin-bottom:28px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:20px}
+
+    .intro h2{margin:0 0 8px 0;font-size:28px}
+    .intro p{color:var(--muted);margin:0 0 16px}
+    .badges{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{background:#06111a;padding:8px 10px;border-radius:999px;color:var(--muted);font-weight:600;font-size:13px}
+
+    .profile{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+    .avatar{width:120px;height:120px;border-radius:12px;background:linear-gradient(180deg,#122329,#0b2230);display:flex;align-items:center;justify-content:center;font-family:JetBrains Mono;color:var(--accent-2);font-size:28px}
+    .small{color:var(--muted);font-size:14px}
+
+    section{margin-bottom:18px}
+    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .section-title h3{margin:0}
+    .section-title p{margin:0;color:var(--muted);font-size:13px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+    .project{background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:10px;min-height:140px}
+    .project h4{margin:0}
+    .project p{margin:0;color:var(--muted);font-size:13px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:#071826;padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+
+    footer{color:var(--muted);text-align:center;padding:20px 0}
+
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr}
+      .nav{flex-direction:column;gap:12px}
+      .brand{width:100%;justify-content:space-between}
+      .nav-links{width:100%;justify-content:flex-start}
+    }
+  </style>
 </head>
 <body>
-    <h1>hello</h1>
+  <div class="container">
+    <nav class="nav card">
+      <div class="brand">
+        <div class="logo">Y</div>
+        <div>
+          <h1>Ahmet Yavuzkanat</h1>
+          <p>Backend Developer • Bilişim Sistemleri</p>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#about">Hakkımda</a>
+        <a href="#projects">Projeler</a>
+        <a href="#contact">İletişim</a>
+        <button class="lang-btn" onclick="toggleLanguage()">Translate EN/TR</button>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="card intro" id="intro-section">
+        <h2 id="intro-title">Merhaba — ben Ahmet</h2>
+        <p id="intro-text">İkinci sınıf Bilişim Sistemleri öğrencisiyim. Backend, Java, Python, Go konusunda çalışıyorum. Aşağıda projelerim ve iletişim bilgilerim var — daha fazlasını eklemeni bekliyorum.</p>
+
+        <div class="badges">
+          <div class="badge">Java</div>
+          <div class="badge">Python</div>
+          <div class="badge">Go</div>
+          <div class="badge">Node.js</div>
+          <div class="badge">MySQL</div>
+        </div>
+
+        <section id="about" style="margin-top:14px">
+          <div class="section-title">
+            <h3 id="about-title">Hakkımda</h3>
+            <p>• kısa</p>
+          </div>
+          <p class="small" id="about-text">Üniversite: Mehmet Akif Ersoy Üniversitesi — Bölüm: Bilişim Sistemleri Mühendisliği. Staj ve açık kaynak projelerine odaklı. İşe alım için GitHub profilimi inceleyebilirsiniz.</p>
+        </section>
+
+      </div>
+
+      <aside class="card profile">
+        <div class="avatar">AY</div>
+        <div>
+          <div style="font-weight:700">Ahmet Y.</div>
+          <div class="small">Backend · Open Source Enthusiast</div>
+        </div>
+        <div style="width:100%;display:flex;gap:8px;justify-content:center">
+          <a class="tag" href="https://github.com/yavuzkanat" target="_blank">GitHub</a>
+          <a class="tag" href="#contact">Mail</a>
+        </div>
+      </aside>
+    </div>
+
+    <section id="projects">
+      <div class="section-title">
+        <h3 id="projects-title">Projeler</h3>
+        <p>• Seçme örnekler</p>
+      </div>
+
+      <div class="grid">
+        <article class="project">
+          <div>
+            <h4>Project One</h4>
+            <p>Kısa açıklama: REST API, Node.js + Express, MySQL.</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div>
+            <h4>Project Two</h4>
+            <p>Kısa açıklama: Web scraper / data pipeline (Python).</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div>
+            <h4>Project Three</h4>
+            <p>Kısa açıklama: Microservice örneği — Go + Docker.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-title">
+        <h3 id="contact-title">İletişim</h3>
+        <p>• Bana ulaş</p>
+      </div>
+      <div class="card" style="display:flex;gap:12px;align-items:center;flex-direction:column">
+        <p class="small" id="contact-mail">E-posta: <strong>ahmet@yavuzkanat.dev</strong></p>
+        <p class="small">Konum: Türkiye</p>
+        <p class="small">GitHub: <a href="https://github.com/yavuzkanat" target="_blank">github.com/yavuzkanat</a></p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="small">© 2025 Ahmet Yavuzkanat — Crafted with dark vibes</div>
+    </footer>
+  </div>
+
+  <script src="src/lang.js"></script>
 </body>
 </html>
